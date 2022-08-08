@@ -21,5 +21,5 @@ source ~/.bash_profile
 cd $HOME
 git clone https://github.com/masa-finance/masa-node-v1.0
 cd masa-node-v1.0
-PRIVATE_CONFIG=ignore docker-compose up -d
+PRIVATE_CONFIG=ignore sudo docker-compose up -d
 docker ps
