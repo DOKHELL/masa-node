@@ -1,15 +1,24 @@
+function installDocker {
+	if exists docker; then
+		sleep 1
+	else
+		echo -e '\n\e[42mInstall Docker\e[0m\n' && sleep 1
+		curl -fsSL https://get.docker.com -o get-docker.sh && sh get-docker.sh
+	fi
+}
+
+function installDockerCompose {
+	echo -e '\n\e[42mInstall Docker Compose\e[0m\n' && sleep 1
+	wget https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Linux-x86_64
+	chmod +x docker-compose-Linux-x86_64
+	mv docker-compose-Linux-x86_64 /usr/bin/docker-compose
+}
+
 sudo apt update && sudo apt upgrade -y
 sudo apt install curl tar wget clang ca-certificates gnupg lsb-release pkg-config libssl-dev jq build-essential git make ncdu net-tools -y
-#sudo apt install apt-transport-https ca-certificates curl software-properties-common
-#curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-#sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-sudo apt-get install docker
-sudo apt update
-sudo apt install docker-ce -y
-sudo systemctl start docker
-sudo systemctl enable docker
 
-sudo apt-get install docker-compose
+installDocker
+installDockerCompose
 
 ver="1.17.11"
 cd $HOME
